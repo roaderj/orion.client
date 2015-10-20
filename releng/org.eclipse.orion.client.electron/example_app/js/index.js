@@ -1,5 +1,6 @@
 requirejs(['fileClient'],function(fileClient){
-	fileClient.getJSON(function(data){
-		console.log(data);
+	var d = fileClient.getJSON('index');
+	d.then(function(result){
+	    console.log(result);
 	});
 });

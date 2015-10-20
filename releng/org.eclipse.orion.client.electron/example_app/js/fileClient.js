@@ -1,11 +1,13 @@
 // Get file from server
-define(function(){
-	var getJSON = function(callback) {
+define(['Deferred'],function(Deferred){
+	var getJSON = function(message) {
+		var d = new Deferred();
 		var ipc = require('ipc');
 		ipc.on('fileServer-reply', function(data) {
-			callback(data);
+			d.resolve(data);
 		});
-		ipc.send('fileClient-sent', 'index');
+		ipc.send('fileClient-sent', message);
+		return d;
 	}
 	return {
 		getJSON : getJSON
