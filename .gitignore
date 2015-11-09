@@ -19,3 +19,6 @@ node_modules/
 
 # Mac Development
 .DS_Store
+
+# orion_electron/out
+/releng/org.eclipse.orion.client.electron/orion_electron/out/
