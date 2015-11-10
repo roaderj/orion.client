@@ -72,7 +72,7 @@ module.exports = function(grunt) {
   		},
   		copywebtools: {
   			files: [{
-  				cwd: '../../../bundles/org.eclipse.orion.client.webtolls/web',
+  				cwd: '../../../bundles/org.eclipse.orion.client.webtools/web',
   				src: ['**/*'],
   				dest: 'out/',
   				expand: true
@@ -92,10 +92,10 @@ module.exports = function(grunt) {
   				dot: true
   			}
   		},
-  		copyfixing: {
+  		fix_bidiUtils: {
   			files: [{
   				cwd: './electronFixing',
-  				src: ['**/*'],
+  				src: ['bidiUtils.js'],
   				dest: 'out/orion/',
   				expand: true
   			}],
