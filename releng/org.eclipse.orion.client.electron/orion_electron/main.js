@@ -28,7 +28,7 @@ app.on('ready', function() {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/out/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/out/index.html');
 
   // Open the DevTools.
   mainWindow.openDevTools();
@@ -44,7 +44,7 @@ app.on('ready', function() {
 
 // fileSystemServer that handle the file loading
 var fileSystemServer = (function(){
-  var ipc = require('ipc');
+  var ipc = require('electron').ipcMain;
   ipc.on('fileClient-sent', function(event, message) {
     if (message == 'index') {
       var data = {
