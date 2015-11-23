@@ -24,7 +24,6 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({
     width: 800, 
     height: 600,
-    "node-integration": false
   });
 
   // and load the index.html of the app.
@@ -45,16 +44,9 @@ app.on('ready', function() {
 // fileSystemServer that handle the file loading
 var fileSystemServer = (function(){
   var ipc = require('electron').ipcMain;
-  ipc.on('fileClient-sent', function(event, message) {
-    if (message == 'index') {
-      var data = {
-        project: "orion-electron",
-        version: "0.0.1"
-      };
-      event.sender.send('fileServer-reply', data);
-    } else
+  ipc.on('GET', function(event, message) {
+    var returnURL = message.url + '-GET';
     console.log(message);
+    event.sender.send(returnURL, 'success');
   });
-  return {
-  };
 })();

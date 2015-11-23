@@ -103,6 +103,28 @@ module.exports = function(grunt) {
   				dot: true
   			}
   		},
+      fix_electron_xhr: {
+        files: [{
+          cwd: './electronFixing',
+          src: ['xhr.js'],
+          dest: 'out/orion/',
+          expand: true
+        }],
+        options: {
+          dot: true
+        }
+      },
+      fix_electron_require: {
+        files: [{
+          cwd: './electronFixing',
+          src: ['index.html'],
+          dest: 'out/',
+          expand: true
+        }],
+        options: {
+          dot: true
+        }
+      },
   	},
 
   });
