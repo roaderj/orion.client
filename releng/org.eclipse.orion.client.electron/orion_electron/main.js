@@ -44,9 +44,27 @@ app.on('ready', function() {
 // fileSystemServer that handle the file loading
 var fileSystemServer = (function(){
   var ipc = require('electron').ipcMain;
+  var fs = require('fs');
   ipc.on('GET', function(event, message) {
     var returnURL = message.url + '-GET';
     console.log(message);
-    event.sender.send(returnURL, 'success');
+    fs.readFile(__dirname + '/out/' + message.url,'utf8',function(err,data) {
+      event.sender.send(returnURL, data);
+    });
   });
+
+  ipc.on('PUT', function(event, message) {
+    var returnURL = message.url + '-PUT';
+    console.log(message);
+  });
+
+  ipc.on('POST', function(event, message) {
+    var returnURL = message.url + '-POST';
+    console.log(message);
+  });
+  ipc.on('DELETE', function(event, message) {
+    var returnURL = message.url + '-DELETE';
+    console.log(message);
+  });
+
 })();

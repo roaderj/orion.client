@@ -55,7 +55,11 @@ define([
 			responseText: responseText,
 			status: status,
 			url: message.url,
-			xhr: data
+			xhr: {
+				response: data,
+				status:202,
+				getResponseHeader: function(){}
+			}
 		};
 		if (typeof error !== 'undefined') { //$NON-NLS-0$
 			result.error = error;
