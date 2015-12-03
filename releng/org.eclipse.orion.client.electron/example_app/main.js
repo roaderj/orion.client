@@ -1,8 +1,10 @@
-var app = require('app');  // Module to control application life.
-var BrowserWindow = require('browser-window');  // Module to create native browser window.
+const electron = require('electron');
+const app = electron.app;  // Module to control application life.
+const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
+const ipc = require('electron').ipcMain;
 
 // Report crashes to our server.
-require('crash-reporter').start();
+electron.crashReporter.start();
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -24,7 +26,7 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({width: 800, height: 600});
 
   // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
 
   // Open the DevTools.
   mainWindow.openDevTools();
@@ -40,16 +42,12 @@ app.on('ready', function() {
 
 // fileSystemServer that handle the file loading
 var fileSystemServer = (function(){
-  var ipc = require('ipc');
   ipc.on('fileClient-sent', function(event, message) {
-    if (message == 'index') {
-      var data = {
-        project: "orion-electron",
-        version: "0.0.1"
-      };
-      event.sender.send('fileServer-reply', data);
-    } else
-    console.log(message);
+    var data = {
+      project: message,
+      version: "0.0.1"
+    };
+    event.sender.send(message + '-reply', data);
   });
   return {
   };

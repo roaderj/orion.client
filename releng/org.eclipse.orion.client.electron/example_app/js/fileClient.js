@@ -2,8 +2,8 @@
 define(['Deferred'],function(Deferred){
 	var getJSON = function(message) {
 		var d = new Deferred();
-		var ipc = require('ipc');
-		ipc.on('fileServer-reply', function(data) {
+		var ipc = nodereq('electron').ipcRenderer;
+		ipc.on(message + '-reply', function(event,data) {
 			d.resolve(data);
 		});
 		ipc.send('fileClient-sent', message);

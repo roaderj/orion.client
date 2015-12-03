@@ -2,6 +2,12 @@
 <html>
   <head>
     <title>Hello World!</title>
+    <script>
+		if (window.require) {
+			window.nodereq = window.require;
+			delete window.require;
+		}
+	</script>
     <script src="js/require.js" defer async="true" data-main="js/index"></script>
   </head>
   <body>
